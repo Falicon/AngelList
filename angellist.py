@@ -7,7 +7,7 @@
 #                                                                                     #
 #######################################################################################
 
-import md5
+import hashlib
 import urllib, urllib2
 import simplejson as json
 
@@ -359,7 +359,7 @@ class AngelList(object):
       if slug:
         url = '%s&slug=%s' % (url, slug)
       if email:
-        md5_hash = md5.new(email).hexdigest()
+        md5_hash = hashlib.md5(email).hexdigest()
         url = '%s&md5=%s' % (url, md5_hash)
       try:
         results = self.do_get_request(url)
