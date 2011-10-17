@@ -42,7 +42,6 @@ class AngelList(object):
         self.OAUTH_ENDPOINT    = "%s://angel.co/api" % self.URI_SCHEME
         self.ACCESS_TOKEN_URL  = "/oauth/token"
         self.AUTHORIZATION_URL = "/oauth/authorize"
-        self.redirect_url      = 'http://localhost:8001'
         self.client_id         = None
         self.client_secret     = None
         self.access_token      = None
@@ -51,14 +50,13 @@ class AngelList(object):
     # OAUTH SPECIFIC SECTION
     #############################
 
-    def getAuthorizeURL(self, client_id = None, redirect_url = None):
+    def getAuthorizeURL(self, client_id = None, ):
         self.client_id = client_id and client_id or self.client_id
         if self.client_id is None:
             raise AngelListError("client_id is NULL. Plase set this or pass it as a parameter first.")
-        self.redirect_url = redirect_url and redirect_url or self.redirect_url
-        return "%s%s?client_id=%s&response_type=code&rediect_uri=%s" % (self.OAUTH_ENDPOINT, self.AUTHORIZATION_URL, self.client_id, self.redirect_url)
+        return "%s%s?client_id=%s&response_type=code" % (self.OAUTH_ENDPOINT, self.AUTHORIZATION_URL, self.client_id)
 
-    def getAccessToken(self, client_id = None, client_secret = None, code = None, redirect_url = None):
+    def getAccessToken(self, client_id = None, client_secret = None, code = None):
       self.client_id = client_id and client_id or self.client_id
       if self.client_id is None:
         raise AngelListError("client_id is NULL. Plase set this or pass it as a parameter first.")
@@ -70,7 +68,8 @@ class AngelList(object):
       if code is None:
         raise AngelListError("code is NULL. Plase pass the REQUEST['code'] angel.co/api/oauth/authorize responeded with as a parameter.")
 
-      return "%s%s?client_id=%s&client_secret=%s&code=%s&grant_type=authorization_code&redirect_uri=%s" % (self.OAUTH_ENDPOINT, self.ACCESS_TOKEN_URL, self.client_id, self.client_secret, code, self.redirect_url)
+      url = "%s%s?client_id=%s&client_secret=%s&code=%s&grant_type=authorization_code" % (self.OAUTH_ENDPOINT, self.ACCESS_TOKEN_URL, self.client_id, self.client_secret, code)
+
       try:
         headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
         params = urllib.urlencode({})
