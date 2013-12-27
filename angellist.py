@@ -9,7 +9,11 @@
 
 import hashlib
 import urllib, urllib2
-import simplejson as json
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 """
 Provides a Pure Python AngelList API Interface.
