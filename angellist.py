@@ -268,7 +268,7 @@ class AngelList(object):
       startup_id - OPTIONAL - the startup who's user relationships you want to view
       """
       self.check_access_token(access_token)
-      url = '%s/1/startups_roles?access_token=%s' % (self.API_ENDPOINT, self.access_token)
+      url = '%s/1/startup_roles?v=1&access_token=%s' % (self.API_ENDPOINT, self.access_token)
       if user_id:
         url = '%s&user_id=%s' % (url, user_id)
       if startup_id:
