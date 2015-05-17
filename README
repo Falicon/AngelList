@@ -10,10 +10,7 @@ OAUTH:
 
 The AngelList api requires authentication via OAuth2 ( http://angel.co/api/oauth/faq ). This process is started by sending users to a specific angel.co url to authorize your app. You generate that url like this:
 
-import angellist
-al = angellist.AngelList()
-al.client_id = 'YOUR_CLIENT_ID_ASSIGNED_BY_ANGEL_LIST'
-auth_url = al.getAuthorizationURL()
+auth_url = "https://angel.co/api/oauth/authorize?client_id=%s&response_type=code" % 'YOUR_CLIENT_ID_ASSIGNED_BY_ANGEL_LIST'
 
 Then you just redirect your user to the generated URL. Once a user validates your app on AngelList, AngelList will send them back to the endpoint your specified when you set up your app along with a URL param of code. It will look something like this:
 
