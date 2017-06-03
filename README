@@ -1,6 +1,6 @@
 The start of a VERY simple Python library for working with the AngelList api ( http://angel.co/api )
 
-DISCLAIMER:
+DISCLAIMER: 
 
 Note: This code is a quick hack for a personal project I'm playing around with. There are obvious holes (for example the delete stuff isn't working yet) and there are most certainly much cleaner/better/faster ways to interact with the AngelList api, but this version basically gave me quick access to the functionality that I needed at the time.
 
